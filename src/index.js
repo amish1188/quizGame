@@ -2,44 +2,53 @@ import quizzes from "./quiz.js";
 
 
 let question = document.querySelector(".question");
-let answer1 = document.getElementsByClassName("answer-1");
-let answer2 = document.getElementsByClassName("answer-2");
-let answer3 = document.getElementsByClassName("answer-3");
-let answer4 = document.getElementsByClassName("answer-4");
+let answer1 = document.querySelector(".answer-1");
+let answer2 = document.querySelector(".answer-2");
+let answer3 = document.querySelector(".answer-3");
+let answer4 = document.querySelector(".answer-4");
 
-
-const randomQuizzes = [];
-
-
-const randomizingQuiz = () => {
-    let importedQuiz = quizzes;
-    const randomNum = () => {
-        let randomNum = Math.floor(Math.random() * importedQuiz.length);
-        return randomNum;
-    }
-    let randomNumber = randomNum();
-    randomQuizzes.push(importedQuiz[randomNumber]);
-    importedQuiz.splice(randomNumber, 1);
-    randomNumber = randomNum();
-    randomQuizzes.push(importedQuiz[randomNumber]);
-    importedQuiz.splice(randomNumber, 1);
-    randomNumber = randomNum();
-    randomQuizzes.push(importedQuiz[randomNumber]);
-    importedQuiz.splice(randomNumber, 1);
-    
-    console.log(randomQuizzes);
-
-    // for(let i = 0; i<quizzes.length; i++) {
-    // }
-} 
+//empty array that will be filled with randomized quizzes
+let randomQuizzes = [];
 
 randomizingQuiz();
 
+questionDisplay();    
 
-console.log(randomQuizzes[0].question);
 
-const questionDisplay = () =>
+console.log(e);
+
+
+
+
+
+
+
+//function that display first question
+function questionDisplay() 
     {
         question.innerText = randomQuizzes[0].question
+
+        answer1.innerText = randomQuizzes[0].answer1
+        answer2.innerText = randomQuizzes[0].answer2
+        answer3.innerText = randomQuizzes[0].answer3
+        answer4.innerText = randomQuizzes[0].answer4
     }
-questionDisplay();    
+
+
+//function that returns randomQuizzes with randomly separated quizzes
+function randomizingQuiz() {
+    let importedQuiz = quizzes;
+    let randomNumber;
+    let randomNum = () => {
+        return Math.floor(Math.random() * importedQuiz.length);
+    }
+
+    let counter = 0;
+    
+    while (counter < 3) {
+        randomNumber = randomNum();
+        randomQuizzes.push(importedQuiz[randomNumber]);
+        importedQuiz.splice(randomNumber, 1);
+        counter++;
+    }
+} 
