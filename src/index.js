@@ -1,38 +1,56 @@
 import quizzes from "./quiz.js";
 
 
-let question = document.querySelector(".question");
-let answer1 = document.querySelector(".answer-1");
-let answer2 = document.querySelector(".answer-2");
-let answer3 = document.querySelector(".answer-3");
-let answer4 = document.querySelector(".answer-4");
+let question = document.getElementById("question");
+let answer1 = document.getElementById("answer-1");
+let answer2 = document.getElementById("answer-2");
+let answer3 = document.getElementById("answer-3");
+let answer4 = document.getElementById("answer-4");
+const answers = document.querySelector(".answers");
 
 //empty array that will be filled with randomized quizzes
-let randomQuizzes = [];
-
+let randomQuizzes = []
+let current = 0;
 randomizingQuiz();
+questionDisplay(current);    
 
-questionDisplay();    
-
-
-console.log(e);
-
-
+nextQuestion();
 
 
 
 
 
 //function that display first question
-function questionDisplay() 
-    {
-        question.innerText = randomQuizzes[0].question
+function questionDisplay(currentQuestion) 
+{
+    question.innerText = randomQuizzes[currentQuestion].question
+    answer1.innerText = randomQuizzes[currentQuestion].answer1
+    answer2.innerText = randomQuizzes[currentQuestion].answer2
+    answer3.innerText = randomQuizzes[currentQuestion].answer3
+    answer4.innerText = randomQuizzes[currentQuestion].answer4
+    
+}
 
-        answer1.innerText = randomQuizzes[0].answer1
-        answer2.innerText = randomQuizzes[0].answer2
-        answer3.innerText = randomQuizzes[0].answer3
-        answer4.innerText = randomQuizzes[0].answer4
-    }
+function nextQuestion() {
+    let correct = randomQuizzes[current].correct
+    answers.addEventListener("click", e => 
+    {
+        if (current >3){
+            alert("game finished");
+        } else {
+            if(e.toElement.id === `answer-${correct}`){
+                alert("correct");
+            } else {
+                alert("not correct");
+            }
+            current++;
+            console.log(current);
+            questionDisplay(current);
+            
+        }
+
+    })
+}
 
 
 //function that returns randomQuizzes with randomly separated quizzes
