@@ -1,12 +1,12 @@
 import quizzes from "./quiz.js";
 
-const answers = document.querySelector(".answers");
+let answers = document.querySelector(".answers");
 let question = document.getElementById("question");
 
 // current index of randomQuizzes
 let current = 0;
 //empty array that will be filled with randomized quizzes
-let randomQuizzes = randomizingQuiz();
+let randomQuizzes = randomizingQuiz(quizzes);
 
 
 checkIfEnd(current);    
@@ -21,7 +21,7 @@ checkIfEnd(current);
 
 
 //function that display first question
-function questionDisplay(randomQuestion) 
+export function questionDisplay(randomQuestion) 
 {
     question.innerText = randomQuestion.question
     randomQuestion.answers.forEach(answer => {
@@ -34,14 +34,14 @@ function questionDisplay(randomQuestion)
 }
 
 // function that resets buttons
-function resetState() {
+export function resetState() {
     while(answers.firstChild) {
         answers.removeChild(answers.firstChild);
     }
 }
 
 //function that shows if answer was correct
-function selectAnswer(e) {
+export function selectAnswer(e) {
     let correct = randomQuizzes[current].correct;    
     if(e.toElement.id == correct) {
         alert("correct")
@@ -55,7 +55,7 @@ function selectAnswer(e) {
 
 
 //function that checks if all questions were asked
-function checkIfEnd() {
+export function checkIfEnd() {
     resetState();
     if(current < randomQuizzes.length) {
         questionDisplay(randomQuizzes[current]);
@@ -66,7 +66,7 @@ function checkIfEnd() {
 }
 
 //function that returns randomQuizzes with randomly separated quizzes
-function randomizingQuiz() {
+export function randomizingQuiz(quizzes) {
     let shuffledQuizz = [];
     let importedQuiz = quizzes;
     let randomNumber;

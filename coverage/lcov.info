@@ -1,5 +1,5 @@
 TN:
-SF:/Users/Amish1188/Desktop/skole/skole sec sem/js/quiz/src/index.js
+SF:src/index.js
 FN:24,questionDisplay
 FN:27,(anonymous_1)
 FN:37,resetState
@@ -62,7 +62,7 @@ BRF:4
 BRH:0
 end_of_record
 TN:
-SF:/Users/Amish1188/Desktop/skole/skole sec sem/js/quiz/src/quiz.js
+SF:src/quiz.js
 FNF:0
 FNH:0
 DA:1,0
