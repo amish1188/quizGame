@@ -1,57 +1,69 @@
 import quizzes from "./quiz.js";
 
-
-let question = document.getElementById("question");
-let answer1 = document.getElementById("answer-1");
-let answer2 = document.getElementById("answer-2");
-let answer3 = document.getElementById("answer-3");
-let answer4 = document.getElementById("answer-4");
 const answers = document.querySelector(".answers");
+let question = document.getElementById("question");
 
+// current index of randomQuizzes
+let current = 0;
 //empty array that will be filled with randomized quizzes
 let randomQuizzes = []
-let current = 0;
+
 randomizingQuiz();
-questionDisplay(current);    
-
-nextQuestion();
+checkIfEnd(current);    
 
 
+
+
+/**************************************************************************/ 
+/*************************   ALL FUNCTIONS   ******************************/ 
+/**************************************************************************/ 
 
 
 
 //function that display first question
-function questionDisplay(currentQuestion) 
+function questionDisplay(randomQuestion) 
 {
-    question.innerText = randomQuizzes[currentQuestion].question
-    answer1.innerText = randomQuizzes[currentQuestion].answer1
-    answer2.innerText = randomQuizzes[currentQuestion].answer2
-    answer3.innerText = randomQuizzes[currentQuestion].answer3
-    answer4.innerText = randomQuizzes[currentQuestion].answer4
-    
+    question.innerText = randomQuestion.question
+    randomQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerText = answer.text;
+        button.id = answer.id;
+        button.addEventListener("click", selectAnswer);
+        answers.appendChild(button);
+    });
 }
 
-function nextQuestion() {
-    let correct = randomQuizzes[current].correct
-    answers.addEventListener("click", e => 
-    {
-        if (current >3){
-            alert("game finished");
-        } else {
-            if(e.toElement.id === `answer-${correct}`){
-                alert("correct");
-            } else {
-                alert("not correct");
-            }
-            current++;
-            console.log(current);
-            questionDisplay(current);
-            
-        }
-
-    })
+// function that resets buttons
+function resetState() {
+    while(answers.firstChild) {
+        answers.removeChild(answers.firstChild);
+    }
 }
 
+//function that shows if answer was correct
+function selectAnswer(e) {
+    let correct = randomQuizzes[current].correct;    
+    if(e.toElement.id == correct) {
+        alert("correct")
+    } else {
+        alert("not correct")
+    }
+
+    current++;
+    checkIfEnd(current);
+}
+
+
+//function that checks if all questions were asked
+function checkIfEnd() {
+    resetState();
+    if(current < randomQuizzes.length) {
+        questionDisplay(randomQuizzes[current]);
+        
+    } else {
+        alert("eeeend")
+    }
+}
 
 //function that returns randomQuizzes with randomly separated quizzes
 function randomizingQuiz() {
@@ -61,9 +73,10 @@ function randomizingQuiz() {
         return Math.floor(Math.random() * importedQuiz.length);
     }
 
+    const i = quizzes.length;
     let counter = 0;
     
-    while (counter < 3) {
+    while (counter < i) {
         randomNumber = randomNum();
         randomQuizzes.push(importedQuiz[randomNumber]);
         importedQuiz.splice(randomNumber, 1);
