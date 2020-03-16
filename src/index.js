@@ -6,9 +6,9 @@ let question = document.getElementById("question");
 // current index of randomQuizzes
 let current = 0;
 //empty array that will be filled with randomized quizzes
-let randomQuizzes = []
+let randomQuizzes = randomizingQuiz();
 
-randomizingQuiz();
+
 checkIfEnd(current);    
 
 
@@ -67,6 +67,7 @@ function checkIfEnd() {
 
 //function that returns randomQuizzes with randomly separated quizzes
 function randomizingQuiz() {
+    let shuffledQuizz = [];
     let importedQuiz = quizzes;
     let randomNumber;
     let randomNum = () => {
@@ -78,8 +79,10 @@ function randomizingQuiz() {
     
     while (counter < i) {
         randomNumber = randomNum();
-        randomQuizzes.push(importedQuiz[randomNumber]);
+        shuffledQuizz.push(importedQuiz[randomNumber]);
         importedQuiz.splice(randomNumber, 1);
         counter++;
     }
+
+    return shuffledQuizz;
 } 
