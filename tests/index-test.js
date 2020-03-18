@@ -1,7 +1,19 @@
-const index = require("../src/index.js");
+const React = require('react');
+const { mount } = require('enzyme');
+const {indexo} = require("../src/index");
 
-const numbers = [1,2,3];
 
-test('Check if random shuffles all questions', ()=> {
-    expect(index.randomizingQuiz(numbers)).toEqual(numbers.length)
-})
+
+function checkQuizzIsAvailable(driver) {
+
+    const question = driver.find('.question');
+    expect(question.length).toEqual(1);
+
+    const answers = driver.find('.question');
+    expect(answers.length).toEqual(3);
+}
+
+test('Test rendered quiz', () => {
+    const driver = mount(<QuestionContainer/>);
+    checkQuizzIsAvailable(driver);
+}) 

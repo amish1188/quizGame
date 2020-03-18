@@ -38,11 +38,8 @@ class App extends Component {
     }
     render() {
         console.log(this.state.data);
-        return(
-            <div className="container" onClick={this.checkControl}>
-              
+        return(   
                 <QuestionContainer info= {this.state.data}></QuestionContainer>
-            </div>
         )
     }
 

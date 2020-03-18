@@ -28,8 +28,8 @@ class QuestionContainer extends Component {
          
           return (
             
-            <div>
-                <h4>{getQuestionText}</h4>
+            <div className="container">
+                <h4 className="question">{getQuestionText}</h4>
                 {answers.map(answer => {
                     return <Answer handleClick={this.choseAnswer} key={answer.id} text={answer.text} correct={answer.correct} ></Answer>
                 })}

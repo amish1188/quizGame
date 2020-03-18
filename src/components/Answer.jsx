@@ -7,8 +7,11 @@ class Answer extends Component {
 
 
     render() {
+        
+        
+
         return (
-            <button className={this.props.correct.toString()} onClick={this.props.handleClick}>{this.props.text}</button>
+            <button className={this.props.correct.toString() + ' ' +  "answer"} onClick={this.props.handleClick}>{this.props.text}</button>
         );
     }
 }
