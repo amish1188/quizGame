@@ -6,17 +6,32 @@ class QuestionContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            counter: 2
-        }
+            counter: 0
+        };
+        this.choseAnswer = this.choseAnswer.bind(this)
     }
+
+
+    choseAnswer(e) {
+        if(e.target.className === 'false') {
+            alert("false");
+            this.setState({counter:  this.state.counter + 1});
+        } else {
+            alert("right!");
+            this.setState({counter:  this.state.counter + 1});
+        }
+     }
+
     render() {
           let answers = this.props.info[this.state.counter].answers
-        return (
+          let getQuestionText = this.props.info[this.state.counter].question
+         
+          return (
             
             <div>
-                <h4>{this.props.info[this.state.counter].question}</h4>
+                <h4>{getQuestionText}</h4>
                 {answers.map(answer => {
-                    return <Answer key={answer.id} text={answer.text}></Answer>
+                    return <Answer handleClick={this.choseAnswer} key={answer.id} text={answer.text} correct={answer.correct} ></Answer>
                 })}
             </div>
             )

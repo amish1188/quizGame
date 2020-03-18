@@ -13,8 +13,7 @@ class App extends Component {
             data: this.shuffle()
         }
     }
-    
-    
+   
 
     
     shuffle() {
@@ -38,9 +37,9 @@ class App extends Component {
         return shuffledQuizz
     }
     render() {
-        
+        console.log(this.state.data);
         return(
-            <div className="container">
+            <div className="container" onClick={this.checkControl}>
               
                 <QuestionContainer info= {this.state.data}></QuestionContainer>
             </div>

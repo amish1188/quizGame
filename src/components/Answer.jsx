@@ -5,10 +5,10 @@ class Answer extends Component {
         super(props)
     }
 
+
     render() {
-        console.log(this.props.text);
         return (
-            <p>{this.props.text}</p>
+            <button className={this.props.correct.toString()} onClick={this.props.handleClick}>{this.props.text}</button>
         );
     }
 }
