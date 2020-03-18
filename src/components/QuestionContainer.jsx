@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import quizzes from "../quiz";
 import Answer from "./Answer"
 
 class QuestionContainer extends Component {
@@ -13,7 +12,7 @@ class QuestionContainer extends Component {
 
 
     choseAnswer(e) {
-        if(e.target.className === 'false') {
+        if(e.target.classList.contains('false')) {
             alert("false");
             this.setState({counter:  this.state.counter + 1});
         } else {
