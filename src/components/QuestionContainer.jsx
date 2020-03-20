@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Answer from "./Answer"
+import {Answer} from "./Answer"
 
-class QuestionContainer extends Component {
+export class QuestionContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,9 +22,8 @@ class QuestionContainer extends Component {
      }
 
     render() {
-          let answers = this.props.info[this.state.counter].answers
-          let getQuestionText = this.props.info[this.state.counter].question
-         
+                let answers = this.props.info[this.state.counter].answers
+                let getQuestionText = this.props.info[this.state.counter].question 
           return (
             
             <div className="container">
@@ -37,4 +36,3 @@ class QuestionContainer extends Component {
     }
 }
 
-export default QuestionContainer;

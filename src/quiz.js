@@ -1,4 +1,4 @@
-let quizzes = [
+export const quizzes = [
     {
         question: "Why Spanish Flu was called Spanish?",
         answers: [
@@ -28,4 +28,3 @@ let quizzes = [
     }
 ];
 
-export default quizzes;
