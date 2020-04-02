@@ -1,12 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+
 import {QuizGame} from './QuizGame';
+import {Home} from './Home';
 
-
+const notFound = () => {
+    return (
+        <div>
+            <h2>not found hehe</h2>
+        </div>
+    )
+}
 
 const App = () => {
     return (
-        <QuizGame/>
+        <BrowserRouter>
+            <div>
+                <Switch>
+                    <Route exact path='/quizgame' component={QuizGame}></Route>
+                    <Route exact path='/' component={Home}></Route>
+                    <Route component={notFound}></Route>
+                </Switch>
+            </div>
+        </BrowserRouter>
     )
 }
 

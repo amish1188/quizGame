@@ -1,8 +1,8 @@
 const React = require('react');
 import {shallow} from 'enzyme';
 const { mount } = require('enzyme');
-const {QuizGame} = require("../src/QuizGame");
-const {shuffle} = require('../src/QuizGame')
+const {QuizGame} = require("../src/server/QuizGame");
+const {shuffle} = require('../src/server/QuizGame')
 
 const a = [1,2,3,4,5];
 
