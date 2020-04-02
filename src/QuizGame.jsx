@@ -12,6 +12,8 @@ export class QuizGame extends Component {
     }
    
 
+
+   
     
     shuffle(a) {
         let shuffledQuizz = [];
