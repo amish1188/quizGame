@@ -1,4 +1,4 @@
-export const quizzes = [
+const quizzes = [
     {
         question: "Why Spanish Flu was called Spanish?",
         answers: [
@@ -27,4 +27,6 @@ export const quizzes = [
         ]
     }
 ];
+
+module.exports = quizzes;
 

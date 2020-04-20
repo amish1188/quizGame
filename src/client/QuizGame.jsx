@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {quizzes} from "./quiz";
+//import {quizzes} from "../server/db/quiz";
 import {QuestionContainer} from "./components/QuestionContainer";
 
 
@@ -7,12 +7,21 @@ export class QuizGame extends Component {
     constructor(props){
     super(props);
         this.state = {
-            data: this.shuffle(quizzes)
+            loading: true,
+            data: []
+            //this.shuffle(quizzes)
         }
     }
    
-
-
+    componentDidMount() {
+        fetch("/api/quizesapi")
+            .then(res => res.json())
+            .then(json => {this.setState({data: json, loading:false})
+                }
+            )
+    }
+    
+  
    
     
     shuffle(a) {
@@ -34,13 +43,13 @@ export class QuizGame extends Component {
         }
         
         return shuffledQuizz
-    }
+    } 
 
     render() {
-        console.log(this.state.data);
+        //console.log(this.state.data);
         return( 
-                
-                <QuestionContainer info= {this.state.data}></QuestionContainer>
+                <div>{this.state.loading? <div>loading</div> : <div>loaded</div>}</div>
+                //<QuestionContainer info= {this.state.data}></QuestionContainer>
             
         )
     }
