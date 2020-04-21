@@ -16,8 +16,8 @@ const notFound = () => {
 const App = () => {
     return (
         
-        <QuizGame></QuizGame>
-        /* <BrowserRouter>
+       
+        <BrowserRouter>
             <div>
                 <Switch>
                     <Route exact path='/quizgame' component={QuizGame}></Route>
@@ -25,7 +25,7 @@ const App = () => {
                     <Route component={notFound}></Route>
                 </Switch>
             </div>
-        </BrowserRouter> */
+        </BrowserRouter> 
     )
 }
 

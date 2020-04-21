@@ -2,7 +2,8 @@
     "author": "Marcin",
     "babel": {
         "plugins": [
-            "@babel/plugin-proposal-class-properties"
+            "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-transform-runtime"
         ],
         "presets": [
             "@babel/env",
@@ -10,6 +11,8 @@
         ]
     },
     "dependencies": {
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/runtime": "^7.9.2",
         "babel-core": "^6.26.3",
         "babel-polyfill": "^6.26.0",
         "express": "4.17.1",
@@ -22,7 +25,7 @@
         "@babel/cli": "7.7.4",
         "@babel/core": "7.7.4",
         "@babel/plugin-proposal-class-properties": "7.7.4",
-        "@babel/preset-env": "7.7.4",
+        "@babel/preset-env": "^7.9.5",
         "@babel/preset-react": "7.7.4",
         "babel-jest": "24.9.0",
         "babel-loader": "8.0.6",

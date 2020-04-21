@@ -13,12 +13,18 @@ export class QuizGame extends Component {
         }
     }
    
-    componentDidMount() {
-        fetch("/api/quizesapi")
-            .then(res => res.json())
-            .then(json => {this.setState({data: json, loading:false})
-                }
-            )
+    async componentDidMount() {
+        try {
+            const response = await fetch("/api/quizesapi");
+            const payload = await response.json();
+            this.setState({
+                data: payload,
+                loading: false
+            })
+            console.log(payload[0].question);
+        } catch (error) {
+            console.log(error);
+        }
     }
     
   
@@ -48,8 +54,13 @@ export class QuizGame extends Component {
     render() {
         //console.log(this.state.data);
         return( 
-                <div>{this.state.loading? <div>loading</div> : <div>loaded</div>}</div>
-                //<QuestionContainer info= {this.state.data}></QuestionContainer>
+           
+            <div>{this.state.loading || !this.state.data ? (
+                <div>loading...</div>
+            ) : (
+                <QuestionContainer info= {this.state.data}></QuestionContainer>
+            )}</div>
+                
             
         )
     }
