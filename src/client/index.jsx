@@ -4,6 +4,9 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import {QuizGame} from './QuizGame';
 import {Home} from './Home';
+import {Login} from './Login';
+import {SignUp} from './SignUp';
+
 
 const notFound = () => {
     return (
@@ -20,8 +23,10 @@ const App = () => {
         <BrowserRouter>
             <div>
                 <Switch>
+                    <Route exact path='/home' component={Home}></Route>
+                    <Route exact path='/signup' component={SignUp}></Route>
                     <Route exact path='/quizgame' component={QuizGame}></Route>
-                    <Route exact path='/' component={Home}></Route>
+                    <Route exact path='/' component={Login}></Route>
                     <Route component={notFound}></Route>
                 </Switch>
             </div>
