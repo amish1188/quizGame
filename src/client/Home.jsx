@@ -8,7 +8,7 @@ export class Home extends Component {
     render() {
         return (
             <div>
-                <Link to={'/quizgame'}>
+                <Link to={'/signup'}>
                     Click me
                 </Link>
             </div>

@@ -26,6 +26,13 @@ p {
     margin: 20px 0 30px;
 }
 
+.header {
+    display: flex;
+    padding: 1rem 4rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
 a {
     color: #333;
     font-size: 14px;
@@ -105,7 +112,6 @@ button.ghost {
 .sign-up-container {
     left: 0;
     width: 50%;
-    opacity: 0;
     z-index: 1;
 }
 

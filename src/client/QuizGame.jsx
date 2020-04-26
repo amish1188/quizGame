@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-//import {quizzes} from "../server/db/quiz";
+import { withRouter } from 'react-router-dom';
 import {QuestionContainer} from "./components/QuestionContainer";
 
 
-export class QuizGame extends Component {
+class QuizGame extends Component {
     constructor(props){
     super(props);
         this.state = {
@@ -66,3 +66,4 @@ export class QuizGame extends Component {
     }
 }
 
+export default withRouter(QuizGame);

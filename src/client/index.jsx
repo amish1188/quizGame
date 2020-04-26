@@ -1,37 +1,98 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import {QuizGame} from './QuizGame';
+import QuizGame from './QuizGame';
 import {Home} from './Home';
-import {Login} from './Login';
-import {SignUp} from './SignUp';
+import Login from './Login';
+import SignUp from './SignUp';
+import Headbar from './components/Headbar';
 
 
-const notFound = () => {
-    return (
-        <div>
-            <h2>not found hehe</h2>
-        </div>
-    )
-}
+class App extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null
+        }
+    }
 
-const App = () => {
-    return (
-        
-       
-        <BrowserRouter>
+    componentDidMount() {
+        this.fetchAndUpdateUserInfo();
+    }
+
+    fetchAndUpdateUserInfo = async () => {
+        const url = "/api/user";
+        let response;
+
+        try{
+            response = await fetch(url, {
+                method: 'get'
+            });
+        } catch (err) {
+            this.setState({errorMsg: "Failed to connect to server " + err});
+            return;
+        }
+
+        if (response.status === 401) {
+            //that is ok
+            this.updateLoggedInUser(null);
+            return;
+        }
+
+        if (response.status !== 200) {
+            //TODO here could have some warning message in the page.
+        } else {
+            const payload = await response.json();
+            this.updateLoggedInUser(payload);
+        }
+    }
+
+
+    notFound = () => {
+        return (
             <div>
-                <Switch>
-                    <Route exact path='/home' component={Home}></Route>
-                    <Route exact path='/signup' component={SignUp}></Route>
-                    <Route exact path='/quizgame' component={QuizGame}></Route>
-                    <Route exact path='/' component={Login}></Route>
-                    <Route component={notFound}></Route>
-                </Switch>
+                <h2>not found hehe</h2>
             </div>
-        </BrowserRouter> 
-    )
+        )
+    }
+
+    updateLoggedInUser = (user) => {
+        this.setState({user: user});
+    }
+    
+    render() {
+
+        const id = this.state.user ? this.state.user.id : null;
+
+        return (
+            <BrowserRouter>
+                <div>
+                <Headbar userId={id}
+                         updateLoggedInUser={this.updateLoggedInUser}/>
+                    <Switch>
+                        <Route  exact path='/' 
+                                render = {props => <Home {...props}
+                                                         user={this.state.user}
+                                                         fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>}/>
+                        <Route exact path='/signup' 
+                               render={props => <SignUp {...props}
+                                                         fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>}/>      
+                        <Route exact path='/quizgame' 
+                               render={props => <QuizGame {...props}
+                                                           user={this.state.user}
+                                                           updateLoggedInUser={this.updateLoggedInUser}
+                                                           fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>}/> 
+                        <Route exact path='/login' 
+                               render={props => <Login {...props}
+                                                        fetchAndUpdateUserInfo={this.fetchAndUpdateUserInfo}/>}/> 
+                        <Route component={this.notFound}></Route>
+                    </Switch>
+                </div>
+            </BrowserRouter> 
+        )
+
+    }
 }
 
 ReactDOM.render(<App/>, document.getElementById("root"));
